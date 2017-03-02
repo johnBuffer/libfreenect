@@ -2,7 +2,7 @@ import numpy as np
 
 def get_gradient_color(value, max_value=1024.0):
     #we use 4 colours in our gradient so we normalize value in [0, 4]
-    normalized_value = float(float(value)/max_value*4)
+    normalized_value = float(float(value)/max_value*5)
     normalized_value = min(normalized_value, 4)
     (r, g, b) = (0, 0, 0)
 
