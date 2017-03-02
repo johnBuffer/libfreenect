@@ -3,6 +3,7 @@ import numpy as np
 def get_gradient_color(value, max_value=1024.0):
     #we use 4 colours in our gradient so we normalize value in [0, 4]
     normalized_value = float(float(value)*4.0/max_value)
+    normalized_value = (normalized_value-2)*2
     (r, g, b) = (0, 0, 0)
 
     #print(normalized_value)
@@ -16,13 +17,11 @@ def get_gradient_color(value, max_value=1024.0):
         normalized_value -= 2
         (r, g, b) = (255*normalized_value, 255, 0)
     #cyan -> green
-    elif normalized_value > 1.75:
-        normalized_value -= 1.75
-        normalized_value *= 4
+    elif normalized_value > 1:
+        normalized_value -= 1
         (r, g, b) = (0, 255, 255*(1-normalized_value))
     #blue -> cyan
     else:
-        normalized_value /= 1.75
         (r, g, b) = (0, 255*(1-normalized_value)*2, 255)
 
     return (b, r, g)
