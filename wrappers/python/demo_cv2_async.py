@@ -2,6 +2,7 @@
 import freenect
 import cv2
 import frame_convert2
+import numpy as np
 
 cv2.namedWindow('Depth')
 cv2.namedWindow('RGB')
@@ -10,7 +11,7 @@ keep_running = True
 
 def display_depth(dev, data, timestamp):
     global keep_running
-    data2 = []
+    data2 = np.zeros((data.cols, data.rows))
     cv2.resize(src=data, dst=data2, dsize=0, fx=0.5, fy=0.5)
     cv2.imshow('Depth', frame_convert2.pretty_depth_cv(data2))
     if cv2.waitKey(10) == 27:
