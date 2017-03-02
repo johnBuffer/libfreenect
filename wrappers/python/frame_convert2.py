@@ -23,7 +23,7 @@ def get_gradient_color(value, max_value=1024.0):
         (r, g, b) = (0, 255, 255*(1-normalized_value))
     #blue -> cyan
     else:
-        (r, g, b) = (0, 255*(1-normalized_value), 255)
+        (r, g, b) = (0, 255*(normalized_value), 255)
 
     return (b, g, r)
 
