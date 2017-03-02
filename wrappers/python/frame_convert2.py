@@ -46,7 +46,7 @@ def pretty_depth(depth):
             color[x][y] = get_gradient_color(depth[x][y])"""
 
     gradient_image = [[]]*len(depth)
-    for l in len(depth):
+    for l in range(len(depth)):
         gradient_image[l] = map(get_gradient_color, depth[l])
 
     #gradient_image = map(get_gradient_color, depth)
