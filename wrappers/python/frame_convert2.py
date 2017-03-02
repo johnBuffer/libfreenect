@@ -23,7 +23,9 @@ def get_gradient_color(value, max_value=1024.0):
     else:
         gradient_color = (0, 255*(1-normalized_value), 255)
 
-    return gradient_color
+    (r, g, b) = gradient_color
+
+    return (b, r, g)
 
 
 def pretty_depth(depth):
@@ -39,17 +41,17 @@ def pretty_depth(depth):
     """
 
     np.clip(depth, 0, 1024, depth)
+    """
     depth >>= 2
     depth = depth.astype(np.uint8)
+    """
 
-    """gradient_image = [[]]*len(depth)
+    gradient_image = [[]]*len(depth)
     for l in range(len(depth)):
-        gradient_image[l] = map(get_gradient_color, depth[l])"""
+        gradient_image[l] = map(get_gradient_color, depth[l])
+    np.array(gradient_image)
 
-    #gradient_image = map(get_gradient_color, depth)
-    #np.array(gradient_image)
-
-    return depth
+    return gradient_image
 
 def pretty_depth_cv(depth):
     """Converts depth into a 'nicer' format for display
