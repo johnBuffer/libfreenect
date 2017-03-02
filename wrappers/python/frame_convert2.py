@@ -53,7 +53,7 @@ def pretty_depth(depth):
     for l in range(len(depth)):
         gradient_image[l] = map(get_gradient_color, depth[l])"""
 
-    depth = map(apply_gradient, depth)
+    depth = np.array(map(apply_gradient, depth.tolist()))
     depth = depth.astype(np.uint8)
 
     return depth
