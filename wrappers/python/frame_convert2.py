@@ -48,7 +48,9 @@ def pretty_depth(depth):
         color.append([])
         for y in range(len(depth[0])):
             color[x].append[(255, 255, 0)]
-            
+
+    color = color.astype(np.uint8) 
+
     return color
 
 def pretty_depth_cv(depth):
