@@ -2,13 +2,14 @@ import numpy as np
 
 def get_gradient_color(value, max_value=1024.0):
     #we use 4 colours in our gradient so we normalize value in [0, 4]
-    normalized_value = float(float(value)*4.0/max_value)
+    normalized_value = float(float(value)*5.0/max_value)
     (r, g, b) = (0, 0, 0)
 
     #print(normalized_value)
 
     #yellow -> red
     if normalized_value > 3:
+        normalized_value = min(normalized_value, 3)
         normalized_value -= 3
         (r, g, b) = (255, 255*(1-normalized_value), 0)
     #green -> yellow
