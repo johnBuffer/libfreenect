@@ -4,6 +4,8 @@ def get_gradient_color(value, max_value=1024):
     #we use 4 colours in our gradient so we normalize value in [0, 4]
     normalized_value = value*4/max_value
 
+    print("nv :", normalized_value)
+
     gradient_color = (0, 0, 0)
 
     #yellow -> red
