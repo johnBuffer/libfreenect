@@ -5,7 +5,7 @@ import frame_convert2
 import numpy as np
 
 cv2.namedWindow('Depth')
-cv2.namedWindow('RGB')
+#cv2.namedWindow('RGB')
 keep_running = True
 
 
@@ -31,5 +31,5 @@ def body(*args):
 
 print('Press ESC in window to stop')
 freenect.runloop(depth=display_depth,
-                 video=display_rgb,
+                 video=Nones,
                  body=body)
