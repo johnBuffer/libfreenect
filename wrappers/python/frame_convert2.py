@@ -42,8 +42,14 @@ def pretty_depth(depth):
     np.clip(depth, 0, 1024, depth)
     #depth = depth.astype(np.uint8) 
 
-    return vector_gradient_color(depth)
-
+    #return vector_gradient_color(depth)
+    color = []
+    for x in range(len(depth)):
+        color.append([])
+        for y in range(len(depth[0])):
+            color[x].append[(255, 255, 0)]
+            
+    return color
 
 def pretty_depth_cv(depth):
     """Converts depth into a 'nicer' format for display
