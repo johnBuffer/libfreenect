@@ -47,7 +47,7 @@ def pretty_depth(depth):
     depth >>= 2
     depth = depth.astype(np.uint8)
     """
-    depth = np.array(map(apply_gradient, depth))
+    depth = np.array(map(apply_gradient, depth.tolist()))
     depth = depth.astype(np.uint8)
 
     return depth
