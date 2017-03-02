@@ -13,7 +13,7 @@ def pretty_depth(depth):
         A numpy array that has been processed with unspecified datatype
     """
     np.clip(depth, 0, 1023, depth)
-    print(len(depth), len(depth[0]))
+    print(len(depth[0][0]))
     depth >>= 2
     depth = depth.astype(np.uint8)
     return depth
