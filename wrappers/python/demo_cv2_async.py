@@ -19,10 +19,11 @@ def display_depth(dev, data, timestamp):
 
 def display_rgb(dev, data, timestamp):
     global keep_running
+    gary = frame_convert2.video_cv(data)
     gray = cv2.cvtColor(data, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (5, 5), 0)
     edged = cv2.Canny(gray, 35, 125)
-    cv2.imshow('RGB', frame_convert2.video_cv(edged))
+    cv2.imshow('RGB', edged)
     if cv2.waitKey(10) == 27:
         keep_running = False
 
