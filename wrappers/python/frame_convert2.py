@@ -40,6 +40,7 @@ def pretty_depth(depth):
 
     np.clip(depth, 0, 1024, depth)
     depth >>= 2
+    depth = depth.astype(np.uint8)
 
     """gradient_image = [[]]*len(depth)
     for l in range(len(depth)):
