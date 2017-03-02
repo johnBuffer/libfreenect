@@ -28,8 +28,7 @@ def get_gradient_color(value, max_value=1024.0):
     return (b, g, r)
 
 def apply_gradient(matrix):
-    return [map(get_gradient_color, matrix)]
-
+    return map(get_gradient_color, matrix)
 
 def pretty_depth(depth):
     """Converts depth into a 'nicer' format for display
