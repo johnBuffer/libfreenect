@@ -4,8 +4,8 @@ import cv2
 import frame_convert2
 import numpy as np
 
-cv2.namedWindow('Depth')
-#cv2.namedWindow('RGB')
+#cv2.namedWindow('Depth')
+cv2.namedWindow('RGB')
 keep_running = True
 
 
@@ -19,7 +19,10 @@ def display_depth(dev, data, timestamp):
 
 def display_rgb(dev, data, timestamp):
     global keep_running
-    cv2.imshow('RGB', frame_convert2.video_cv(data))
+    gray = cv2.cvtColor(data, cv2.COLOR_BGR2GRAY)
+    gray = cv2.GaussianBlur(gray, (5, 5), 0)
+    edged = cv2.Canny(gray, 35, 125)
+    cv2.imshow('RGB', frame_convert2.video_cv(edged))
     if cv2.waitKey(10) == 27:
         keep_running = False
 
@@ -30,6 +33,10 @@ def body(*args):
 
 
 print('Press ESC in window to stop')
-freenect.runloop(depth=display_depth,
+'''freenect.runloop(depth=display_depth,
                  video=None,
+                 body=body)'''
+
+freenect.runloop(depth=None,
+                 video=display_rgb,
                  body=body)
