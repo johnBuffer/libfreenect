@@ -31,5 +31,5 @@ def body(*args):
 
 print('Press ESC in window to stop')
 freenect.runloop(depth=display_depth,
-                 video=Nones,
+                 video=None,
                  body=body)
