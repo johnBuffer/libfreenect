@@ -28,7 +28,7 @@ def get_gradient_color(value, max_value=1024.0):
     return (b, g, r)
 
 def apply_gradient(matrix):
-    return map(get_gradient_color, matrix)
+    return [get_gradient_color(value) for value in matrix]
 
 
 def pretty_depth(depth):
@@ -48,11 +48,6 @@ def pretty_depth(depth):
     depth >>= 2
     depth = depth.astype(np.uint8)
     """
-
-    """gradient_image = [[]]*len(depth)
-    for l in range(len(depth)):
-        gradient_image[l] = map(get_gradient_color, depth[l])"""
-
     depth = np.array(map(apply_gradient, depth.tolist()))
     depth = depth.astype(np.uint8)
 
