@@ -22,10 +22,8 @@ def get_gradient_color(value, max_value=1024.0):
         normalized_value -= 1
         (r, g, b) = (0, 255, 255*(1-normalized_value))
     #blue -> cyan
-    elif normalized_value > 0:
-        (r, g, b) = (0, 255*(normalized_value), 255)
     else:
-        (r, g, b) = (255, 0, 0)
+        (r, g, b) = (0, 255*(normalized_value), 255)
 
     return (b, g, r)
 
@@ -46,7 +44,7 @@ def pretty_depth(depth):
         A numpy array that has been processed with unspecified datatype
     """
 
-    np.clip(depth, -1, 1024, depth)
+    np.clip(depth, 0, 1024, depth)
     """
     depth >>= 2
     depth = depth.astype(np.uint8)
