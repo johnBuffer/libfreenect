@@ -37,20 +37,16 @@ def pretty_depth(depth):
         A numpy array that has been processed with unspecified datatype
     """
 
-    #vector_gradient_color = np.vectorize(get_gradient_color)
-
     np.clip(depth, 0, 1024, depth)
     #depth = depth.astype(np.uint8) 
 
     #return vector_gradient_color(depth)
-    color = np.zeros((len(depth), len(depth[0]), 3))
+    """color = np.zeros((len(depth), len(depth[0]), 3))
     for x in range(len(depth)):
         for y in range(len(depth[0])):
-            color[x][y] = get_gradient_color(depth[x][y])
+            color[x][y] = get_gradient_color(depth[x][y])"""
 
-    color = color.astype(np.uint8) 
-
-    return color
+    return map(get_gradient_color, depth)
 
 def pretty_depth_cv(depth):
     """Converts depth into a 'nicer' format for display
