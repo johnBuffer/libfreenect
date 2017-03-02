@@ -5,6 +5,8 @@ def get_gradient_color(value, max_value=1024.0):
     normalized_value = float(float(value)*4.0/max_value)
     gradient_color = (0, 0, 0)
 
+    print(normalized_value)
+
     #yellow -> red
     if normalized_value > 3:
         normalized_value -= 3
