@@ -1,8 +1,8 @@
 import numpy as np
 
-def get_gradient_color(value, max_value=1024):
+def get_gradient_color(value, max_value=1024.0):
     #we use 4 colours in our gradient so we normalize value in [0, 4]
-    normalized_value = value*4/max_value
+    normalized_value = float(value)*4/max_value
 
     print("nv :", normalized_value)
 
@@ -48,7 +48,11 @@ def pretty_depth(depth):
         for y in range(len(depth[0])):
             color[x][y] = get_gradient_color(depth[x][y])"""
 
-    gradient_image = map(get_gradient_color, depth)
+    gradient_image = []
+    for l in depth:
+        gradient_image.append(map(get_gradient_color, l))
+
+    #gradient_image = map(get_gradient_color, depth)
 
     return gradient_image
 
