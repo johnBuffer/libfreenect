@@ -12,7 +12,7 @@ keep_running = True
 def display_depth(dev, data, timestamp):
     global keep_running
     data2 = frame_convert2.pretty_depth_cv(cv2.resize(data, (0, 0), fx=0.25, fy=0.25))
-    cv2.imshow('Depth', cv2.resize(data2, (0, 0), fx=4, fy=4, interpolation='INTER_NEAREST'))
+    cv2.imshow('Depth', cv2.resize(data2, (0, 0), fx=4, fy=4, interpolation=cv2.INTER_NEAREST))
     if cv2.waitKey(10) == 27:
         keep_running = False
 
