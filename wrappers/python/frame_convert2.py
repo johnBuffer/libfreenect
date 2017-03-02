@@ -3,7 +3,7 @@ import numpy as np
 def get_gradient_color(value, max_value=1024.0):
     #we use 4 colours in our gradient so we normalize value in [0, 4]
     factor = 11
-    normalized_value = factor-float(value)/max_value*factor
+    normalized_value = factor-float(float(value)/max_value*factor)
     normalized_value = min(normalized_value, 4)
     (r, g, b) = (0, 0, 0)
 
@@ -30,6 +30,7 @@ def get_gradient_color(value, max_value=1024.0):
 def apply_gradient(matrix):
     return map(get_gradient_color, matrix)
 
+
 def pretty_depth(depth):
     """Converts depth into a 'nicer' format for display
 
@@ -47,6 +48,11 @@ def pretty_depth(depth):
     depth >>= 2
     depth = depth.astype(np.uint8)
     """
+
+    """gradient_image = [[]]*len(depth)
+    for l in range(len(depth)):
+        gradient_image[l] = map(get_gradient_color, depth[l])"""
+
     depth = np.array(map(apply_gradient, depth.tolist()))
     depth = depth.astype(np.uint8)
 
