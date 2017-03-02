@@ -46,7 +46,9 @@ def pretty_depth(depth):
         for y in range(len(depth[0])):
             color[x][y] = get_gradient_color(depth[x][y])"""
 
-    return map(get_gradient_color, depth)
+    gradient_image = map(get_gradient_color, depth)
+
+    return gradient_image
 
 def pretty_depth_cv(depth):
     """Converts depth into a 'nicer' format for display
