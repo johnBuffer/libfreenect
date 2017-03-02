@@ -49,9 +49,11 @@ def pretty_depth(depth):
     gradient_image = [[]]*len(depth)
     for l in range(len(depth)):
         gradient_image[l] = map(get_gradient_color, depth[l])
-    np.array(gradient_image)
 
-    return np.array(gradient_image)
+    depth = np.array(gradient_image)
+    depth = depth.astype(np.uint8)
+
+    return depth
 
 def pretty_depth_cv(depth):
     """Converts depth into a 'nicer' format for display
