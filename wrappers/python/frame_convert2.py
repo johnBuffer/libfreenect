@@ -24,7 +24,7 @@ def get_gradient_color(value, max_value=1024.0):
     else:
         (r, g, b) = (0, 255*(1-normalized_value), 255)
 
-    return (b, g, r)
+    return (r, g, b)
 
 def apply_gradient(matrix):
     map(get_gradient_color, matrix)
