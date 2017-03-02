@@ -19,8 +19,8 @@ def get_gradient_color(value, max_value=1024.0):
     """elif normalized_value > 1.5:
         normalized_value -= 1.5
         normalized_value *= 2
-        (r, g, b) = (0, 255, 255*(1-normalized_value))
-    #blue -> cyan"""
+        (r, g, b) = (0, 255, 255*(1-normalized_value))"""
+    #blue -> cyan
     else:
         normalized_value /= 2
         (r, g, b) = (0, 255*(1-normalized_value)*2, 255)
