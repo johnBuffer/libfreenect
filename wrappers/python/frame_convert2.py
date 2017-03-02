@@ -43,11 +43,12 @@ def pretty_depth(depth):
     #depth = depth.astype(np.uint8) 
 
     #return vector_gradient_color(depth)
-    color = np.zeros(0)
+    color = np.zeros((len(depth), len(depth[0]), 3))
     for x in range(len(depth)):
-        color.append([])
         for y in range(len(depth[0])):
-            color[x].append[(255, 255, 0)]
+            color[x][y][0] = 255
+            color[x][y][1] = 255
+            color[x][y][2] = 0
 
     color = color.astype(np.uint8) 
 
