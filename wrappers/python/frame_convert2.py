@@ -50,10 +50,6 @@ def pretty_depth(depth):
 
     return depth
 
-def format_depth(depth):
-    np.clip(depth, 0, 1024, depth)
-    depth *= 256/1024
-
 def pretty_depth_cv(depth):
     """Converts depth into a 'nicer' format for display
 
@@ -65,7 +61,7 @@ def pretty_depth_cv(depth):
     Returns:
         A numpy array with unspecified datatype
     """
-    return depth
+    return pretty_depth(depth)
 
 
 def video_cv(video):
