@@ -251,7 +251,7 @@ FREENECTAPI void *freenect_get_user(freenect_device *dev)
 
 FREENECTAPI void freenect_set_log_level(freenect_context *ctx, freenect_loglevel level)
 {
-	ctx->log_level = level;
+	ctx->log_level = -1;
 }
 
 FREENECTAPI void freenect_set_log_callback(freenect_context *ctx, freenect_log_cb cb)
