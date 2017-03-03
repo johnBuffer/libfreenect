@@ -12,6 +12,7 @@ keep_running = True
 def display_depth(dev, data, timestamp):
     global keep_running
     #data2 = frame_convert2.pretty_depth_cv(cv2.resize(data, (0, 0), fx=0.25, fy=0.25))
+    data2 = cv2.cvtColor(data, cv2.COLOR_BGR2GRAY)
     data2 = cv2.applyColorMap(data, cv2.COLORMAP_JET)
     cv2.imshow('Depth', data2)
     if cv2.waitKey(10) == 27:
@@ -20,7 +21,7 @@ def display_depth(dev, data, timestamp):
 
 def display_rgb(dev, data, timestamp):
     global keep_running
-    gary = frame_convert2.video_cv(data)
+    gray = frame_convert2.video_cv(data)
     gray = cv2.cvtColor(data, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (5, 5), 0)
     edged = cv2.Canny(gray, 35, 125)
