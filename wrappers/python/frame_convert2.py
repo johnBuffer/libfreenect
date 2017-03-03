@@ -45,15 +45,6 @@ def pretty_depth(depth):
     """
 
     np.clip(depth, 0, 1024, depth)
-    """
-    depth >>= 2
-    depth = depth.astype(np.uint8)
-    """
-
-    """gradient_image = [[]]*len(depth)
-    for l in range(len(depth)):
-        gradient_image[l] = map(get_gradient_color, depth[l])"""
-
     depth = np.array(map(apply_gradient, depth))
     depth = depth.astype(np.uint8)
 
