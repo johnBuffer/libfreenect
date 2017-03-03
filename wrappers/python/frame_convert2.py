@@ -52,7 +52,7 @@ def pretty_depth(depth):
 
 def format_depth(depth):
     np.clip(depth, 0, 1024, depth)
-    depth >>= 2
+    depth *= 256/1024
 
 def pretty_depth_cv(depth):
     """Converts depth into a 'nicer' format for display
