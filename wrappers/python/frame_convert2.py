@@ -65,7 +65,7 @@ def pretty_depth_cv(depth):
     Returns:
         A numpy array with unspecified datatype
     """
-    return format_depth(depth)
+    return depth
 
 
 def video_cv(video):
