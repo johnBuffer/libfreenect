@@ -12,7 +12,7 @@ keep_running = True
 def display_depth(dev, data, timestamp):
     global keep_running
     #data2 = frame_convert2.pretty_depth_cv(cv2.resize(data, (0, 0), fx=0.25, fy=0.25))
-    data2 = frame_convert2.pretty_depth_cv(data)
+    #data2 = frame_convert2.pretty_depth_cv(data)
     data2 = cv2.applyColorMap(data, cv2.COLORMAP_JET)
     cv2.imshow('Depth', data)
     if cv2.waitKey(10) == 27:
