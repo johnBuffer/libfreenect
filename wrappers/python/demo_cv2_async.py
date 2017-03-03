@@ -15,7 +15,7 @@ def find_object(data, object):
     img2 = object # trainImage
 
     # Initiate SIFT detector
-    sift = cv2.SIFT()
+    sift = cv2.xfeatures2d.SIFT_create()
 
     # find the keypoints and descriptors with SIFT
     kp1, des1 = sift.detectAndCompute(img1, None)
