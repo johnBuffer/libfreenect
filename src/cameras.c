@@ -125,9 +125,6 @@ static int stream_process(freenect_context *ctx, packet_stream *strm, uint8_t *p
 	if (strm->seq != hdr->seq) {
 		uint8_t lost = hdr->seq - strm->seq;
 		strm->lost_pkts += lost;
-
-			strm->flag, strm->lost_pkts, strm->valid_frames, (float)strm->lost_pkts / strm->valid_frames);
-
 		if (lost > 5 || strm->variable_length) {
 			strm->synced = 0;
 			return 0;
