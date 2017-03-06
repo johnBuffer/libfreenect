@@ -100,12 +100,8 @@ static int stream_process(freenect_context *ctx, packet_stream *strm, uint8_t *p
 		l_info = l_notice = l_warning = LL_SPEW;
 
 	if (hdr->magic[0] != 'R' || hdr->magic[1] != 'B') {
-		FN_LOG(l_notice, "[Stream %02x] Invalid magic %02x%02x\n",
-		       strm->flag, hdr->magic[0], hdr->magic[1]);
 		return 0;
 	}
-
-	FN_FLOOD("[Stream %02x] Packet with flag: %02x\n", strm->flag, hdr->flag);
 
 	uint8_t sof = strm->flag|1;
 	uint8_t mof = strm->flag|2;
@@ -114,7 +110,6 @@ static int stream_process(freenect_context *ctx, packet_stream *strm, uint8_t *p
 	// sync if required, dropping packets until SOF
 	if (!strm->synced) {
 		if (hdr->flag != sof) {
-			FN_SPEW("[Stream %02x] Not synced yet...\n", strm->flag);
 			return 0;
 		}
 		strm->synced = 1;
@@ -130,13 +125,10 @@ static int stream_process(freenect_context *ctx, packet_stream *strm, uint8_t *p
 	if (strm->seq != hdr->seq) {
 		uint8_t lost = hdr->seq - strm->seq;
 		strm->lost_pkts += lost;
-		FN_LOG(l_info, "[Stream %02x] Lost %d packets\n", strm->flag, lost);
 
-		FN_DEBUG("[Stream %02x] Lost %d total packets in %d frames (%f lppf)\n",
 			strm->flag, strm->lost_pkts, strm->valid_frames, (float)strm->lost_pkts / strm->valid_frames);
 
 		if (lost > 5 || strm->variable_length) {
-			FN_LOG(l_notice, "[Stream %02x] Lost too many packets, resyncing...\n", strm->flag);
 			strm->synced = 0;
 			return 0;
 		}
@@ -161,39 +153,32 @@ static int stream_process(freenect_context *ctx, packet_stream *strm, uint8_t *p
 		if (!(strm->pkt_num == 0 && hdr->flag == sof) &&
 		    !(strm->pkt_num == strm->pkts_per_frame-1 && hdr->flag == eof) &&
 		    !(strm->pkt_num > 0 && strm->pkt_num < strm->pkts_per_frame-1 && hdr->flag == mof)) {
-			FN_LOG(l_notice, "[Stream %02x] Inconsistent flag %02x with %d packets in buf (%d total), resyncing...\n",
-			       strm->flag, hdr->flag, strm->pkt_num, strm->pkts_per_frame);
+
 			strm->synced = 0;
 			return got_frame_size;
 		}
 		// check data length
 		if (datalen > expected_pkt_size) {
-			FN_LOG(l_warning, "[Stream %02x] Expected max %d data bytes, but got %d. Dropping...\n",
-			       strm->flag, expected_pkt_size, datalen);
 			return got_frame_size;
 		}
 		if (datalen < expected_pkt_size)
-			FN_LOG(l_warning, "[Stream %02x] Expected %d data bytes, but got %d\n",
-			       strm->flag, expected_pkt_size, datalen);
+
 	} else {
 		// check the header to make sure it's what we expect
 		if (!(strm->pkt_num == 0 && hdr->flag == sof) &&
 		    !(strm->pkt_num < strm->pkts_per_frame && (hdr->flag == eof || hdr->flag == mof))) {
-			FN_LOG(l_notice, "[Stream %02x] Inconsistent flag %02x with %d packets in buf (%d total), resyncing...\n",
-			       strm->flag, hdr->flag, strm->pkt_num, strm->pkts_per_frame);
+
 			strm->synced = 0;
 			return got_frame_size;
 		}
 		// check data length
 		if (datalen > expected_pkt_size) {
-			FN_LOG(l_warning, "[Stream %02x] Expected max %d data bytes, but got %d. Resyncng...\n",
-			       strm->flag, expected_pkt_size, datalen);
+
 			strm->synced = 0;
 			return got_frame_size;
 		}
 		if (datalen < expected_pkt_size && hdr->flag != eof) {
-			FN_LOG(l_warning, "[Stream %02x] Expected %d data bytes, but got %d. Resyncing...\n",
-			       strm->flag, expected_pkt_size, datalen);
+
 			strm->synced = 0;
 			return got_frame_size;
 		}
