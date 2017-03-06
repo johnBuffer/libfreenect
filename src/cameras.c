@@ -125,6 +125,9 @@ static int stream_process(freenect_context *ctx, packet_stream *strm, uint8_t *p
 	if (strm->seq != hdr->seq) {
 		uint8_t lost = hdr->seq - strm->seq;
 		strm->lost_pkts += lost;
+
+			strm->flag, strm->lost_pkts, strm->valid_frames, (float)strm->lost_pkts / strm->valid_frames);
+
 		if (lost > 5 || strm->variable_length) {
 			strm->synced = 0;
 			return 0;
@@ -158,24 +161,19 @@ static int stream_process(freenect_context *ctx, packet_stream *strm, uint8_t *p
 		if (datalen > expected_pkt_size) {
 			return got_frame_size;
 		}
-		if (datalen < expected_pkt_size)
-
 	} else {
 		// check the header to make sure it's what we expect
 		if (!(strm->pkt_num == 0 && hdr->flag == sof) &&
 		    !(strm->pkt_num < strm->pkts_per_frame && (hdr->flag == eof || hdr->flag == mof))) {
-
 			strm->synced = 0;
 			return got_frame_size;
 		}
 		// check data length
 		if (datalen > expected_pkt_size) {
-
 			strm->synced = 0;
 			return got_frame_size;
 		}
 		if (datalen < expected_pkt_size && hdr->flag != eof) {
-
 			strm->synced = 0;
 			return got_frame_size;
 		}
@@ -258,7 +256,6 @@ static int stream_setbuf(freenect_context *ctx, packet_stream *strm, void *pbuf)
 		return 0;
 	} else {
 		if (!pbuf && !strm->lib_buf) {
-			FN_ERROR("Attempted to set buffer to NULL but stream was started with no internal buffer\n");
 			return -1;
 		}
 		strm->usr_buf = pbuf;
